@@ -1,6 +1,6 @@
 export const instant = false
 
-import { getTrendingMovies } from "@/lib/tmdb";
+import { getTrendingMovies } from "@/lib/omdb"
 
 export default async function Home(){
     const movies = await getTrendingMovies()
