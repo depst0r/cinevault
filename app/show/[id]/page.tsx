@@ -25,7 +25,16 @@ export default async function Movie({
                 </div>
                 <div className="flex-1 flex flex-col gap-4">
                     <h1 className="text-4xl font-bold">{data.name}</h1>
+                    <div className="flex flex-wrap gap-3 items-center text-sm">
                     <span className="bg-yellow-500 text-black px-2 py-1 rounded font-bold">⭐ {data.rating?.average}</span>
+                    <span className="text-slate-400">Премьера: {data.premiered || 'Неизвестно'}</span>
+                    <span className={`px-2 py-1 rounded ${data.status === 'Running' ? 'bg-green-600' : 'bg-slate-600'}` }>{data.status}</span>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                        {data.genres && data.genres.map((genre: string) => (
+                            <span className="bg-slate-700 text-slate-200 px-2 py-1 rounded text-xs" key={genre}>{genre}</span>
+                        ))}
+                    </div>
                     <div className="text-slate-300 leading-relaxed" dangerouslySetInnerHTML={{ __html: data.summary || 'No summary' }} />
                 </div>
             </div>
