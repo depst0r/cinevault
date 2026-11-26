@@ -9,7 +9,7 @@ import SearchBar from "@/components/SearchBar"
 export default async function Home({
     searchParams 
 } : {
-    searchParams: Promise<{q?: string}>
+    searchParams: Promise<{q?: string, genre?: string}>
 }){
 
     type TVMazeShow = {
@@ -17,18 +17,21 @@ export default async function Home({
         id: number;
         name: string;
         image: { medium: string } | null;
+        genres: string[];
     }
 }
-    const { q } = await searchParams
+    const { q, genre } = await searchParams
     const movies = await SearchMovies(q || 'Marvel')
 
+    const filteredMovies = genre ? movies.filter((item: TVMazeShow) => item.show.genres.includes(genre)) : movies 
+    
     return (
         <>
         <div className="p-8 flex items-center justify-center">
         <SearchBar/>
         </div>
         <main className="p-8 grid grid-cols-2 md:grid-cols-4 gap-4">
-            {movies && movies.map((item: TVMazeShow) => (
+            {filteredMovies && filteredMovies.map((item: TVMazeShow) => (
                 <Link href={`/show/${item.show.id}`} key={item.show.id}>
                     <div className="bg-slate-800 rounded overflow-hidden flex flex-col ">
                     <div className="relative w-full aspect-2/3">
