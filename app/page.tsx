@@ -4,6 +4,8 @@ import { SearchMovies } from "@/lib/api"
 import Image from "next/image"
 import Link from "next/link"
 
+import FilterBar from "@/components/FilterBar"
+
 import SearchBar from "@/components/SearchBar"
 
 export default async function Home({
@@ -28,6 +30,7 @@ export default async function Home({
     return (
         <>
         <div className="p-8 flex items-center justify-center">
+        <FilterBar q={q}/>
         <SearchBar/>
         </div>
         <main className="p-8 grid grid-cols-2 md:grid-cols-4 gap-4">
